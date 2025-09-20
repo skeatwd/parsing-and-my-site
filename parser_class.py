@@ -67,6 +67,7 @@ class ParseData:
                 result.append([row[0], row[1], row[3]])
         
         return result
-    
-p = ParseData()
-print(p.return_news_from_file()[0])
+    """
+    Написать метод, который будет каждый день в 00:00 очищать файл от вчерашних
+    новостей. 
+    """

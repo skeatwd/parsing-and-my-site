@@ -8,7 +8,6 @@ parse_date = ParseData()
 @app.route('/')
 def print_news():
 	news = parse_date.return_news_from_file()
-	print(news[0])
 	return render_template('index.html', news=news)
 
 
