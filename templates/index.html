@@ -3,20 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Каталог свежих новостей</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
 </head>
 <body>
     <h1>Свежие новости</h1>
 	<h2>Новость дня</h2>
-	<div class="news_column">
-		<table>
-			{% for new in news %}
-			<tr>
-				{{ new[0] }} {{ new[1] }}
-				<a href="{{ new[2] }}">Href</a>
-			</tr>
-			{% endfor %}
-		</table>
+    <div id="top-news">
+	    <a href="{{ news[0][2] }}" class="news">
+		    <div class="description">
+			    {{ news[0][0] }}
+		    </div>
+		    <div class="time">
+			    {{ news[0][1] }}
+		    </div>
+	    </a>
 
+    </div>
+    <h3>Новости за сутки</h3>
+	<div class="news_column">
+		{% for new in news[1:-1] %}
+		<a href="{{ new[2] }}" class="news">
+			<div class="description">
+				{{ new[0] }}
+			</div>
+			<div class="time">
+				{{ new[1] }}
+			</div>
+		</a>
+		{% endfor %}
 
 	</div>
 	

@@ -3,6 +3,9 @@ from bs4 import BeautifulSoup
 import time
 import random
 from urllib.parse import urljoin
+import csv
+from datetime import datetime
+import os
 
 
 def return_news():
@@ -15,20 +18,41 @@ def return_news():
 	news = []   # ["описание", "время", "ссылка"]
 
 	for column in div_topnews_column:
-		all_a = column.find_all('a')
+		all_a = column.find_all('a')    # type: ignore
 		for a in all_a:
-			href = a.get('href')
+			href = a.get('href')    # type: ignore
 			if href:
-				href = urljoin('https://lenta.ru', href)
+				href = urljoin('https://lenta.ru', href)    # type: ignore
 
-			time_tag = a.find('time')
-			time_news = time_tag.text if time_tag else 'None'
+			time_tag = a.find('time')    # type: ignore
+			time_news = time_tag.text if time_tag else 'None'    # type: ignore
 
-			for t in a.find_all('time'):
+			for t in a.find_all('time'):    # type: ignore
 				t.decompose()
 
 			description = a.text.strip()
 
-			news.append([description, time_news, href])
+			news.append([description, time_news, datetime.now().date() ,href])
 
-	return news
+	return news[:-1]
+
+
+def write_to_file(news):
+	links = []
+	empty_file = True if os.path.getsize('data.csv') == 0 else False
+
+	if not empty_file:
+		with open('data.csv', 'r', encoding='utf-8') as file_read:
+			data_for_file = list(csv.reader(file_read))
+			for item in data_for_file:
+				links.append(item[3])
+
+	with open('data.csv', 'a', newline='', encoding='utf-8') as file:
+		writer = csv.writer(file)
+		for row in news:
+			if row[3] not in links:
+				writer.writerow(row)
+
+
+n = return_news()
+write_to_file(n)
