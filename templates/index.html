@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Каталог свежих новостей</title>
+</head>
+<body>
+    <h1>Свежие новости</h1>
+	<h2>Новость дня</h2>
+	<table>
+		{% for d, t, h in news[0] %}
+		<tr>
+			<td>{{ d }}</td>
+		</tr>
+		{% endfor %}}
+	</table>
+	<div class="news_column">
+		<table>
+			{% for new in news[1:] %}
+			<tr>
+				<td>{{ new[0] }}</td>
+				<td>{{ new[1] }}</td>
+				<td><a href="{{ new[2] }}">Ссылка на новость</a></td>
+			</tr>
+			{% endfor %}
+		</table>
+
+
+	</div>
+	
+</body>
+</html>
