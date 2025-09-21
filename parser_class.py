@@ -3,14 +3,14 @@ from bs4 import BeautifulSoup
 import time
 import random
 from urllib.parse import urljoin
-import csv   # убрать
+import csv
 from datetime import datetime
-import os    # убрать
+import os
 
 class ParseData:
 
     def __init__(self) -> None:
-        self.filename = 'data.csv'   # сделать: self.news = []
+        self.filename = 'data.csv'
 
     def get_list_news(self):
         time.sleep(random.uniform(0.5, 1.5))
@@ -38,10 +38,9 @@ class ParseData:
                 description = a.text.strip()
 
                 news.append([description, time_news, datetime.now().date() ,href])
-                # строку выше сделать: self.news.append(...)
-        return news[:-1]   # а эту строку удалить
+                
+        return news[:-1]   
     
-    '''Удалить следующие методы'''
     def write_to_file(self, news):
         links = []
         empty_file = True if os.path.getsize(self.filename) == 0 else False
@@ -68,3 +67,19 @@ class ParseData:
                 result.append([row[0], row[1], row[3]])
         
         return result
+    
+    def get_news_from_date(self, date):
+        result = []
+        news = self.get_list_news()
+        self.write_to_file(news)
+        
+        with open(self.filename, 'r', encoding='utf-8') as file_read:
+            reader = list(csv.reader(file_read))
+
+            for row in reader:
+                if row[2] == date:
+                    result.append(row)
+        
+        result_sorted = sorted(result, key=lambda news: news[1])
+
+        return result_sorted

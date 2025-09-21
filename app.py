@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from parser_class import ParseData
+from datetime import datetime
 
 app = Flask(__name__)
 parse_date = ParseData()
@@ -7,7 +8,8 @@ parse_date = ParseData()
 
 @app.route('/')
 def print_news():
-	news = parse_date.return_news_from_file()
+	date = str(datetime.now().date())
+	news = parse_date.get_news_from_date(date)
 	return render_template('index.html', news=news)
 
 

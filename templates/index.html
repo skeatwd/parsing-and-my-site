@@ -6,22 +6,20 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
 </head>
 <body>
+	<div>
+		<nav>
+			<a href="/templates/index.html">Сегодня</a>
+			<a href="file1.html">Вчера</a>
+			<a href="file2.html">19 сентября</a>
+			<a href="file3.html">18 сентября</a>
+			<a href="file4.html">17 сентября</a>
+			<a href="file5.html">16 сентября</a>
+			<a href="file6.html">15 сентября</a>
+		</nav>
+	</div>
     <h1>Свежие новости</h1>
-	<h2>Новость дня</h2>
-    <div id="top-news">
-	    <a href="{{ news[0][2] }}" class="news">
-		    <div class="description">
-			    {{ news[0][0] }}
-		    </div>
-		    <div class="time">
-			    {{ news[0][1] }}
-		    </div>
-	    </a>
-
-    </div>
-    <h3>Новости за сутки</h3>
 	<div class="news_column">
-		{% for new in news[1:-1] %}
+		{% for new in news %}
 		<a href="{{ new[2] }}" class="news">
 			<div class="description">
 				{{ new[0] }}
