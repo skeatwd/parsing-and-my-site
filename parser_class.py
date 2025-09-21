@@ -3,14 +3,14 @@ from bs4 import BeautifulSoup
 import time
 import random
 from urllib.parse import urljoin
-import csv
+import csv   # убрать
 from datetime import datetime
-import os
+import os    # убрать
 
 class ParseData:
 
     def __init__(self) -> None:
-        self.filename = 'data.csv'
+        self.filename = 'data.csv'   # сделать: self.news = []
 
     def get_list_news(self):
         time.sleep(random.uniform(0.5, 1.5))
@@ -38,9 +38,10 @@ class ParseData:
                 description = a.text.strip()
 
                 news.append([description, time_news, datetime.now().date() ,href])
-        
-        return news[:-1]
+                # строку выше сделать: self.news.append(...)
+        return news[:-1]   # а эту строку удалить
     
+    '''Удалить следующие методы'''
     def write_to_file(self, news):
         links = []
         empty_file = True if os.path.getsize(self.filename) == 0 else False
@@ -67,7 +68,3 @@ class ParseData:
                 result.append([row[0], row[1], row[3]])
         
         return result
-    """
-    Написать метод, который будет каждый день в 00:00 очищать файл от вчерашних
-    новостей. 
-    """
