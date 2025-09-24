@@ -8,17 +8,17 @@
 <body>
 	<div>
 		<nav>
-			<a href="index.html">Главная</a>
-			<a href="monday.html">Понедельник</a>
-			<a href="tuesday.html">Вторник</a>
-			<a href="wednesday.html">Среда</a>
-			<a href="thursday.html">Четверг</a>
-			<a href="friday.html">Пятница</a>
-			<a href="saturday.html">Суббота</a>
-			<a href="sunday.html">Воскресенье</a>
+			<a href="{{ url_for('print_news') }}">Главная</a>
+			<a href="{{ url_for('monday') }}">Понедельник</a>
+			<a href="{{ url_for('tuesday') }}">Вторник</a>
+			<a href="{{ url_for('wednesday') }}">Среда</a>
+			<a href="{{ url_for('thursday') }}">Четверг</a>
+			<a href="{{ url_for('friday') }}">Пятница</a>
+			<a href="{{ url_for('saturday') }}">Суббота</a>
+			<a href="{{ url_for('sunday') }}">Воскресенье</a>
 		</nav>
 	</div>
-    <h1>Свежие новости на {{ currentdate }}</h1>
+    <h1>Свежие новости на {{ date }}</h1>
 	<div class="news_column">
 		{% for new in news %}
 		<a href="{{ new[3] }}" class="news">

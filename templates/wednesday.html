@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wednesday</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <title>{{ date }}</title>
 </head>
 <body>
     <div>
@@ -18,6 +19,19 @@
 			<a href="sunday.html">Воскресенье</a>
 		</nav>
 	</div>
-    <h1>Wednesday</h1>
+    <h1>Новости за {{ date }}</h1>
+	<div class="news_column">
+		{% for new in news %}
+		<a href="{{ new[3] }}" class="news">
+			<div class="description">
+				{{ new[0] }}
+			</div>
+			<div class="time">
+				{{ new[1] }}
+			</div>
+		</a>
+		{% endfor %}
+
+	</div>
 </body>
 </html>

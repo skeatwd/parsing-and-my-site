@@ -4,7 +4,7 @@ import time
 import random
 from urllib.parse import urljoin
 import csv
-from datetime import datetime
+from datetime import datetime, date
 import os
 
 class ParseData:
@@ -59,16 +59,42 @@ class ParseData:
     
     def get_news_from_date(self, date):
         result = []
-        news = self.get_list_news()
-        self.write_to_file(news)
+        date = str(date)
 
-        with open(self.filename, 'r', encoding='utf-8') as file_read:
-            reader = list(csv.reader(file_read))
+        if os.path.getsize(self.filename) > 0 and date != datetime.now().date():
+            with open(self.filename, 'r', encoding='utf-8') as file_read:
+                reader = list(csv.reader(file_read))
 
-            for row in reader:
+                for row in reader:
+                    if row[2] == date:
+                        result.append(row)
+            
+        else:
+            news = self.get_list_news()
+            self.write_to_file(news)
+
+            for row in news:
                 if row[2] == date:
                     result.append(row)
-        
+
+
         result_sorted = sorted(result, key=lambda news: news[1], reverse=True)
 
         return result_sorted
+    
+    def delete_news(self):
+        date_now = date.today()
+        fresh_news = []
+
+        with open(self.filename, 'r', encoding='utf-8') as file_read:
+            reader = csv.reader(file_read)
+
+            for row in reader:
+                date_from_row = datetime.strptime(row[2], '%Y-%m-%d').date()
+                difference = (date_now - date_from_row).days
+                if difference < 7:
+                    fresh_news.append(row)
+
+        with open(self.filename, 'w', encoding='utf-8', newline='') as file_write:
+            writer = csv.writer(file_write)
+            writer.writerows(fresh_news)
