@@ -37,7 +37,7 @@ class ParseData:
 
                 description = a.text.strip()
 
-                news.append([description, time_news, datetime.now().date() ,href])
+                news.append([description, time_news, str(datetime.now().date()) ,href])
                 
         return news[:-1]   
     
@@ -56,23 +56,12 @@ class ParseData:
             for row in news:
                 if row[3] not in links:
                     writer.writerow(row)
-
-    def return_news_from_file(self):
-        news = self.get_list_news()
-        self.write_to_file(news)
-        result = []
-        with open(self.filename, 'r', encoding='utf-8') as file_read:
-            rider = list(csv.reader(file_read))
-            for row in rider:
-                result.append([row[0], row[1], row[3]])
-        
-        return result
     
     def get_news_from_date(self, date):
         result = []
         news = self.get_list_news()
         self.write_to_file(news)
-        
+
         with open(self.filename, 'r', encoding='utf-8') as file_read:
             reader = list(csv.reader(file_read))
 
@@ -80,6 +69,6 @@ class ParseData:
                 if row[2] == date:
                     result.append(row)
         
-        result_sorted = sorted(result, key=lambda news: news[1])
+        result_sorted = sorted(result, key=lambda news: news[1], reverse=True)
 
         return result_sorted
