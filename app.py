@@ -6,74 +6,81 @@ app = Flask(__name__)
 parse_date = ParseData()
 
 
+def return_date():
+	date_now = datetime.now().date()
+	dates = []
+	for i in range(1, 8):
+		date = date_now - timedelta(days=i)
+		dates.append(date.strftime('%d.%m.%Y'))
+
+	return dates
+
 
 @app.route('/')
 @app.route('/index.html')
 def print_news():
 	date = datetime.now().date()
+	dates = return_date()
 	news = parse_date.get_news_from_date(date)
 
-	return render_template('index.html', news=news, date=date.strftime('%d.%m.%Y'))
+	return render_template('index.html', news=news, date=date.strftime('%d.%m.%Y'), dates=dates)
 
 @app.route('/monday.html')
 def monday():
-	date = datetime.now().date()
-	date_one = date - timedelta(days=7)
-	news = parse_date.get_news_from_date(date_one)
+	dates = return_date()
+	date = str(datetime.strptime(dates[0], '%d.%m.%Y').date())
+	news = parse_date.get_news_from_date(date)
 
-	return render_template('monday.html', date=date_one.strftime('%d.%m.%Y'), news=news)
+	return render_template('monday.html', dates=dates, news=news)
 
 @app.route('/tuesday.html')
 def tuesday():
-	date = datetime.now().date()
-	date_one = date - timedelta(days=6)
-	news = parse_date.get_news_from_date(date_one)
+	dates = return_date()
+	date = str(datetime.strptime(dates[1], '%d.%m.%Y').date())
+	news = parse_date.get_news_from_date(date)
 
-	return render_template('tuesday.html', date=date_one.strftime('%d.%m.%Y'), news=news)
+	return render_template('tuesday.html', dates=dates, news=news)
 
 @app.route('/wednesday.html')
 def wednesday():
-	date = datetime.now().date()
-	date_one = date - timedelta(days=5)
-	news = parse_date.get_news_from_date(date_one)
+	dates = return_date()
+	date = str(datetime.strptime(dates[2], '%d.%m.%Y').date())
+	news = parse_date.get_news_from_date(date)
 
-	return render_template('wednesday.html', date=date_one.strftime('%d.%m.%Y'), news=news)
+	return render_template('wednesday.html', dates=dates, news=news)
 
 @app.route('/thursday.html')
 def thursday():
-	date = datetime.now().date()
-	date_one = date - timedelta(days=4)
-	news = parse_date.get_news_from_date(date_one)
+	dates = return_date()
+	date = str(datetime.strptime(dates[3], '%d.%m.%Y').date())
+	news = parse_date.get_news_from_date(date)
 
-	return render_template('thursday.html', date=date_one.strftime('%d.%m.%Y'), news=news)
+	return render_template('thursday.html', dates=dates, news=news)
 
 @app.route('/friday.html')
 def friday():
-	date = datetime.now().date()
-	date_one = date - timedelta(days=3)
-	news = parse_date.get_news_from_date(date_one)
+	dates = return_date()
+	date = str(datetime.strptime(dates[4], '%d.%m.%Y').date())
+	news = parse_date.get_news_from_date(date)
 
-	return render_template('friday.html', date=date_one.strftime('%d.%m.%Y'), news=news)
+	return render_template('friday.html', dates=dates, news=news)
 
 @app.route('/saturday.html')
 def saturday():
-	date = datetime.now().date()
-	date_one = date - timedelta(days=2)
-	news = parse_date.get_news_from_date(date_one)
-
-	return render_template('saturday.html', date=date_one.strftime('%d.%m.%Y'), news=news)
+	dates = return_date()
+	date = str(datetime.strptime(dates[5], '%d.%m.%Y').date())
+	news = parse_date.get_news_from_date(date)
+	return render_template('saturday.html', dates=dates, news=news)
 
 @app.route('/sunday.html')
 def sunday():
-	date = datetime.now().date()
-	date_one = date - timedelta(days=1)
-	news = parse_date.get_news_from_date(date_one)
+	dates = return_date()
+	date = str(datetime.strptime(dates[6], '%d.%m.%Y').date())
+	news = parse_date.get_news_from_date(date)
 
-	return render_template('sunday.html', date=date_one.strftime('%d.%m.%Y'), news=news)
+	return render_template('sunday.html', dates=dates, news=news)
 
 
 if __name__ == '__main__':
 	parse_date.delete_news()
 	app.run(debug=True)
-
-# Для h1, nav установить другой шрифт, не наклоненный!

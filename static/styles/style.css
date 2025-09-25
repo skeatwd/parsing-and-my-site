@@ -11,5 +11,11 @@ a {
 }
 
 h1, nav {
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Karla', sans-serif;
+}
+
+.title{
+	background-color: #323232;
+	background-position: top;
+	background-size: contain;
 }

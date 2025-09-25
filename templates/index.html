@@ -8,14 +8,14 @@
 <body>
 	<div>
 		<nav>
-			<a href="{{ url_for('print_news') }}">Главная</a>
-			<a href="{{ url_for('monday') }}">Понедельник</a>
-			<a href="{{ url_for('tuesday') }}">Вторник</a>
-			<a href="{{ url_for('wednesday') }}">Среда</a>
-			<a href="{{ url_for('thursday') }}">Четверг</a>
-			<a href="{{ url_for('friday') }}">Пятница</a>
-			<a href="{{ url_for('saturday') }}">Суббота</a>
-			<a href="{{ url_for('sunday') }}">Воскресенье</a>
+			<a href="index.html">Главная</a>
+			<a href="monday.html">{{ dates[0] }}</a>
+			<a href="tuesday.html">{{ dates[1] }}</a>
+			<a href="wednesday.html">{{ dates[2] }}</a>
+			<a href="thursday.html">{{ dates[3] }}</a>
+			<a href="friday.html">{{ dates[4] }}</a>
+			<a href="saturday.html">{{ dates[5] }}</a>
+			<a href="sunday.html">{{ dates[6] }}</a>
 		</nav>
 	</div>
     <h1>Свежие новости на {{ date }}</h1>

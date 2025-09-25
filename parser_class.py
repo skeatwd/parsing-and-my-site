@@ -61,7 +61,7 @@ class ParseData:
         result = []
         date = str(date)
 
-        if os.path.getsize(self.filename) > 0 and date != datetime.now().date():
+        if os.path.getsize(self.filename) > 0 and date != str(datetime.now().date()):
             with open(self.filename, 'r', encoding='utf-8') as file_read:
                 reader = list(csv.reader(file_read))
 

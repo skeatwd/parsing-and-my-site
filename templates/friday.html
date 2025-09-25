@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
-    <title>{{ date }}</title>
+    <title>{{ dates[4] }}</title>
 </head>
 <body>
     <div>
 		<nav>
 			<a href="index.html">Главная</a>
-			<a href="monday.html">Понедельник</a>
-			<a href="tuesday.html">Вторник</a>
-			<a href="wednesday.html">Среда</a>
-			<a href="thursday.html">Четверг</a>
-			<a href="friday.html">Пятница</a>
-			<a href="saturday.html">Суббота</a>
-			<a href="sunday.html">Воскресенье</a>
+			<a href="monday.html">{{ dates[0] }}</a>
+			<a href="tuesday.html">{{ dates[1] }}</a>
+			<a href="wednesday.html">{{ dates[2] }}</a>
+			<a href="thursday.html">{{ dates[3] }}</a>
+			<a href="friday.html">{{ dates[4] }}</a>
+			<a href="saturday.html">{{ dates[5] }}</a>
+			<a href="sunday.html">{{ dates[6] }}</a>
 		</nav>
 	</div>
-    <h1>Новости за {{ date }}</h1>
-    <div class="news_column">
+    <h1>Новости за {{ dates[4] }}</h1>
+    <div class="news_column"> 
 		{% for new in news %}
 		<a href="{{ new[3] }}" class="news">
 			<div class="description">
