@@ -7,25 +7,25 @@
     <title>{{ dates[0] }}</title>
 </head>
 <body>
-	<header>
+	<header class="site-header">
 		<div class="title-site">
 			<h1>LentaWeek</h1>
 		</div>
-		<div>
-			<nav>
-				<ul class="nav">
-					<li><a href="index.html">Главная</a></li>
-					<li><a href="monday.html">{{ dates[0] }}</a></li>
-					<li><a href="tuesday.html">{{ dates[1] }}</a></li>
-					<li><a href="wednesday.html">{{ dates[2] }}</a></li>
-					<li><a href="thursday.html">{{ dates[3] }}</a></li>
-					<li><a href="friday.html">{{ dates[4] }}</a></li>
-					<li><a href="saturday.html">{{ dates[5] }}</a></li>
-					<li><a href="sunday.html">{{ dates[6] }}</a></li>
-				</ul>
-			</nav>
-		</div>
 	</header>
+	<div class="dates-navigation">
+		<nav>
+			<ul class="nav">
+				<li><a href="index.html">Главная</a></li>
+				<li><a href="monday.html">{{ dates[0] }}</a></li>
+				<li><a href="tuesday.html">{{ dates[1] }}</a></li>
+				<li><a href="wednesday.html">{{ dates[2] }}</a></li>
+				<li><a href="thursday.html">{{ dates[3] }}</a></li>
+				<li><a href="friday.html">{{ dates[4] }}</a></li>
+				<li><a href="saturday.html">{{ dates[5] }}</a></li>
+				<li><a href="sunday.html">{{ dates[6] }}</a></li>
+			</ul>
+		</nav>
+	</div>
     <h1>Новости за {{ dates[0] }}</h1>
 	<div class="news_column">
 		{% for new in news %}
@@ -40,5 +40,29 @@
 		{% endfor %}
 
 	</div>
+	<script>
+// Определение активной страницы
+document.addEventListener('DOMContentLoaded', function() {
+    const currentPage = window.location.pathname.split('/').pop();
+    const links = document.querySelectorAll('.nav li a');
+    
+    links.forEach(link => {
+        const linkPage = link.getAttribute('href');
+        if (currentPage === linkPage || 
+            (currentPage === '' && linkPage === 'index.html') ||
+            (currentPage.includes(linkPage.replace('.html', '')))) {
+            link.classList.add('active');
+        }
+    });
+});
+</script>
+	<footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="mailto:mariamolkova@molkova.mail.ru" class="footer-link">Сообщить об ошибке</a>
+                <a href="https://t.me/your_telegram_profile" class="footer-link">Телеграм</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
